@@ -1,0 +1,66 @@
+.stepper-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+
+.circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #204842;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+/* garis antara lingkaran */
+.line-step {
+  height: 4px;
+  flex: 1;
+  background-color: #ccc;
+  margin-left: 8px;
+  margin-right: 8px;
+  z-index: 1;
+  transition: background-color 0.3s;
+}
+
+/* Warna hijau untuk step yang sudah selesai */
+.step.completed .circle {
+  background-color: #bbf49d;
+}
+
+.step.completed + .step .line {
+  background-color: #bbf49d;
+}
+
+/* Jika garis ingin berubah warna sesuai completed, langsung dari line */
+.line.completed {
+  background-color: #bbf49d;
+}
+
+/* Warna hijau untuk step aktif */
+.step.active .circle {
+  background-color: #bbf49d;
+}

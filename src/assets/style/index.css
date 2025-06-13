@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+@import "tailwindcss";
+
+/* Root */
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Outfit", sans-serif;
+}
+
+/* Padding */
+.pd {
+  padding-left: 8vw;
+  padding-right: 8vw;
+}
+
+/* Line */
+.line {
+  border-right: 2px solid black;
+  height: 20px;
+}
+
+/* Bottom & Top Rounded */
+.bottom {
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.top {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+/* Particle */
+
+#tsparticles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.box-item {
+  height: 100px;
+  width: 100vw;
+  border: 1px solid black;
+}
