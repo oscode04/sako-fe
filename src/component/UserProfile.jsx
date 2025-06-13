@@ -43,11 +43,17 @@ const UserProfile = ({ user, logout }) => {
     <div className="relative">
       {/* Icon User */}
       <button
+                onClick={handleLogout}
+                className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+              >
+                <Link to="/">Logout</Link>
+              </button>
+      {/* <button
         onClick={() => setIsModalOpen(!isModalOpen)}
         className="text-2xl text-gray-700"
       >
         <Icon icon="mdi:user-outline" className="text-[#204842]" />
-      </button>
+      </button> */}
 
       {/* Modal Content */}
       {isModalOpen && (
@@ -69,12 +75,12 @@ const UserProfile = ({ user, logout }) => {
                   Email : {user.email}
                 </p>
               )}
-              <button
+              {/* <button
                 onClick={handleLogout}
                 className="w-full bg-[#BBF49D] text-white py-2 px-4 mb-2 rounded"
               >
                 Update Data
-              </button>
+              </button> */}
               <button
                 onClick={handleLogout}
                 className="w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"

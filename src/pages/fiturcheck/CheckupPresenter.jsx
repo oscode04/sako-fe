@@ -3,11 +3,8 @@ import { useState } from "react";
 import CheckupModel from "./CheckupModel";
 import Swal from "sweetalert2";
 
-const useCheckupPresenter = (formData, setFormData, setStep) => {
-  const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
+const useCheckupPresenter = (formData, setFormData, setStep, setLoading, setResult) => {
+    const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedData = {
       ...formData,
@@ -79,7 +76,7 @@ const useCheckupPresenter = (formData, setFormData, setStep) => {
     }
   };
 
-  return { handleChange, handleNumericBlur, handleSubmitPresenter, result, loading };
+  return { handleChange, handleNumericBlur, handleSubmitPresenter };
 };
 
 export default useCheckupPresenter;

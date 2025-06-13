@@ -13,15 +13,15 @@ import useCheckupPresenter from "./CheckupPresenter";
 const CheckupView = () => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState(CheckupModel.initialData);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false); // ✅ hanya definisikan sekali di sini
 
-  // Ambil fungsi presenter, termasuk handleSubmit dan loading/result
+  // Ambil fungsi dari Presenter, tanpa mengambil ulang `loading`
   const {
     handleChange,
     handleNumericBlur,
     handleSubmitPresenter,
-    result,
-    loading,
-  } = CheckupPresenter(formData, setFormData, setStep); // ✅ TAMBAHKAN setStep
+  } = useCheckupPresenter(formData, setFormData, setStep, setLoading, setResult); // ✅ Kirim semua yang dibutuhkan
 
   // Handle konfirmasi kirim data dari user
   const handleSubmitConfirmation = () => {
@@ -327,6 +327,15 @@ const CheckupView = () => {
           </>
         );
       case 5:
+        if (loading) {
+          return (
+            <div className="flex flex-col items-center justify-center min-h-[200px] text-[#204842]">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-[#204842] border-solid mb-3"></div>
+              <p className="text-sm text-[#204842]">Sedang memproses data kamu...</p>
+            </div>
+          );
+        }
+        
         return (
           <div className="space-y-6 font-outfit text-[#204842]">
             <div>
@@ -476,6 +485,7 @@ const CheckupView = () => {
       cancelButtonColor: "#d33",
       cancelButtonText: "Batal",
       confirmButtonText: "Ya, kirim!",
+      reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
         handleSubmitPresenter(); // ✅ kirim ke server dan ubah ke step 4
@@ -516,10 +526,17 @@ const CheckupView = () => {
             {step >= 1 && step < 6 ? (
               <button
                 onClick={step === 5 ? () => handleSubmit() : nextStep}
+                disabled={loading}
                 style={{ backgroundColor: "#BBF49D", color: "#204842" }}
-                className="px-4 py-2 rounded-lg hover:brightness-90 cursor-pointer"
+                className={`px-4 py-2 rounded-lg ${
+                  loading ? "opacity-50 cursor-not-allowed" : "hover:brightness-90 cursor-pointer"
+                }`}
               >
-                {step === 5 ? "Kirim" : "Selanjutnya"}
+                {loading
+                  ? "Mengirim..."
+                  : step === 5
+                  ? "Kirim"
+                  : "Selanjutnya"}
               </button>
             ) : (
               <div></div>
